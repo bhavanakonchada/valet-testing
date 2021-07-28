@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Extract Files
-        run: 7z x test.zip -o$.\destinationFolder -aoa
+        run: 7z x **/*.zip -obase_folder -aoa
 
           
 
