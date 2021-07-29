@@ -37,9 +37,9 @@ jobs:
              console.log(`7z x ${file} -o${target} -aoa`)
              await exec.exec(`7z x ${file} -o${target} -aoa`)
              }
-      - name: post mortem
+      - name: Repo file structure
         shell: bash
         run: |-
-         tree -a
+         tree
           
 
