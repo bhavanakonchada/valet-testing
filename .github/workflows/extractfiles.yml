@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-      - run: npm i @actions/exec
+      - run: npm install execa
       - name: Extract Files
         uses: actions/github-script@v3
         env:
@@ -27,7 +27,7 @@ jobs:
          script: |-         
             const fs = require('fs').promises
             const path = require('path')
-            const exec = require('@actions/exec');
+            const execa = require('execa')
 
             const target = path.resolve(process.env.DESTINATION_FOLDER)
             const patterns = process.env.FILE_PATTERNS
@@ -38,7 +38,7 @@ jobs:
             for await (const file of globber.globGenerator()) {
              if ((await fs.lstat(file)).isDirectory()) continue                  
              console.log(`7z x ${file} -o${target} -aoa`)
-             await exec.exec(`7z x ${file} -o${target} -aoa`)
+             await execa('7z', ['x',${file}, -o${target},'-aoa'])
              }
           
 
