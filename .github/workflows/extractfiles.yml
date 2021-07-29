@@ -13,15 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: npm i @actions/exec
       - name: Extract Files
         uses: actions/github-script@v3
         env:
          DESTINATION_FOLDER: base_folder
          FILE_PATTERNS: "**/*.zip"
+       
         with:
          script: |-         
             const fs = require('fs').promises
             const path = require('path')
+            const exec = require('@actions/exec');
             
             const target = path.resolve(process.env.DESTINATION_FOLDER)
             const patterns = process.env.FILE_PATTERNS
