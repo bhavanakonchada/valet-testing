@@ -13,24 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Extract Files
-        working-directory: ./
-        run: 7z x *.zip -obase_folder -aoa -r
+        working-directory: ./ExtractFiles/sourceFolder/
+        run: 7z x test1.zip -obase_folder -aoa -r
         
   ubuntu_validation_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Extract Files
-        working-directory: ./
-        run: 7z x *.zip -obase_folder -aoa -r
+        working-directory: ./ExtractFiles/sourceFolder/
+        run: 7z x test1.zip -obase_folder -aoa -r
         
   mac_validation_job:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Extract Files
-        working-directory: ./
-        run: 7z x *.zip -obase_folder -aoa -r
+        working-directory: ./ExtractFiles/sourceFolder/
+        run: 7z x test1.zip -obase_folder -aoa -r
 
           
 
