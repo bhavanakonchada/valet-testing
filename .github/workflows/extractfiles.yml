@@ -8,29 +8,31 @@ on:
   workflow_dispatch:
 
 jobs:
-  windows_validation_job:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Extract Files
-        working-directory: ./
-        run: unzip '*.zip' -d destinationfolder
         
   ubuntu_validation_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Extract Files
-        working-directory: ./
-        run: unzip '*.zip'
-        
-  mac_validation_job:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Extract Files
-        working-directory: ./
-        run: unzip '*.zip'
+        uses: actions/github-script@v3
+        env:
+         DESTINATION_FOLDER: base_folder
+         FILE_PATTERNS: "**/*.zip"
+        with:
+         script: |-         
+            const fs = require('fs').promises
+            const path = require('path')
+            const exec = require('@actions/exec')
+            
+            const target = path.resolve(process.env.DESTINATION_FOLDER)
+            const patterns = process.env.FILE_PATTERNS
+            const globber = await glob.create(patterns)
 
+            await io.mkdirP(path.dirname(target))
+
+            for await (const file of globber.globGenerator()) {
+             if ((await fs.lstat(file)).isDirectory()) continue                  
+             await exec.exec(`7z x ${file} -o${target} -aoa`)
+             }
           
 
