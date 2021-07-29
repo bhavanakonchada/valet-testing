@@ -38,7 +38,7 @@ jobs:
             for await (const file of globber.globGenerator()) {
              if ((await fs.lstat(file)).isDirectory()) continue                  
              console.log(`7z x ${file} -o${target} -aoa`)
-             await execa('7z', ['x',${file}, '-o${target}','-aoa'])
+             await execa('7z', ['x', file, '-o', target, '-aoa'])
              }
           
 
