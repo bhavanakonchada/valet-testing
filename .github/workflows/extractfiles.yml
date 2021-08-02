@@ -19,24 +19,20 @@ jobs:
         env:
          DESTINATION_FOLDER: base_folder
          FILE_PATTERNS: "**/*.zip"
-       
         with:
-         script: |-         
-            const fs = require('fs').promises
-            const path = require('path')
-            const exec = require('@actions/exec');
-
-            const target = path.resolve(process.env.DESTINATION_FOLDER)
-            const patterns = process.env.FILE_PATTERNS
-            const globber = await glob.create(patterns)
-
-            await io.mkdirP(path.dirname(target))
-
-            for await (const file of globber.globGenerator()) {
-             if ((await fs.lstat(file)).isDirectory()) continue                  
-             console.log(`7z x ${file} -o${target} -aoa`)
-             await exec.exec(`7z x ${file} -o${target} -aoa`)
-             }
+         script: |-
+          const fs = require('fs').promises
+          const path = require('path')
+          
+          const target = path.resolve(process.env.DESTINATION_FOLDER)
+          const patterns = process.env.FILE_PATTERNS
+          const globber = await glob.create(patterns)
+          
+          await io.mkdirP(path.dirname(target))
+          for await (const file of globber.globGenerator()) {
+            if ((await fs.lstat(file)).isDirectory()) continue
+            await exec.exec(`7z x ${file} -o${target} -aoa`)
+          }
       - name: Repo file structure
         shell: bash
         run: |-
@@ -70,9 +66,5 @@ jobs:
              console.log(`7z x ${file} -o${target} -aoa`)
              await exec.exec(`7z x ${file} -o${target} -aoa`)
              }
-      - name: Repo file structure
-        shell: bash
-        run: |-
-         tree
           
 
