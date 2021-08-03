@@ -31,7 +31,14 @@ jobs:
           
           for await (const file of globber.globGenerator()) {
             if ((await fs.lstat(file)).isDirectory()) continue
-            await exec(`7z x ${file} -o${target} -aoa`)
+            await exec(`7z x ${file} -o${target} -aoa`, (error, stdout, stderr) => {
+             if (error) {
+               console.error(`exec error: ${error}`);
+                return;
+                }
+                console.log(`stdout: ${stdout}`);
+                console.error(`stderr: ${stderr}`);
+            });
           }
       - name: Repo file structure
         shell: bash
