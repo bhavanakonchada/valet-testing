@@ -31,7 +31,7 @@ jobs:
           
           for await (const file of globber.globGenerator()) {
             if ((await fs.lstat(file)).isDirectory()) continue
-            console.log(`7z x ${file} -o${target} -aoa`)
+            console.log(`Executing command: 7z x ${file} -o${target} -aoa`)
             await exec(`7z x ${file} -o${target} -aoa`, (error, stdout, stderr) => {
              if (error) {
                console.error(`exec error: ${error}`);
