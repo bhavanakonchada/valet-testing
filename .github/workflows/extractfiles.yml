@@ -14,31 +14,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Extract Files
-        uses: actions/github-script@v4
-        env:
-         DESTINATION_FOLDER: base_folder
-         ARCHIVE_FILE_PATTERNS: "**/*.zip"
-        with:
-         script: |-
+      uses: actions/github-script@v4
+      env:
+        DESTINATION_FOLDER: "${{ github.workspace }}/unzipfolder"
+        ARCHIVE_FILE_PATTERNS: "**/*.zip"
+      with:
+        script: |-
           const fs = require('fs').promises
           const path = require('path')
-          const { exec } = require("child_process")
-          
+          const exec = require('@actions/exec')
           const target = path.resolve(process.env.DESTINATION_FOLDER)
           const patterns = process.env.ARCHIVE_FILE_PATTERNS
           const globber = await glob.create(patterns)
           await io.mkdirP(path.dirname(target))
-          
           for await (const file of globber.globGenerator()) {
             if ((await fs.lstat(file)).isDirectory()) continue
-            console.log(`Executing command: 7z x ${file} -o${target} -aoa`)
-            await exec(`7z x ${file} -o${target} -aoa`, (error, stdout, stderr) => {
-             if (error) {
-               console.error(`exec error: ${error}`);
-                return;
-                }
-                console.log(`stdout: ${stdout}`);
-            });
+            await exec.exec(`7z x ${file} -o${target} -aoa`)
           }
       - name: Repo file structure
         shell: bash
