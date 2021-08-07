@@ -18,8 +18,10 @@ jobs:
     - name: Extract Files
       uses: actions/github-script@v4
       env:
-        DESTINATION_FOLDER: "${{ github.workspace }}/un7zFolder"
-        ARCHIVE_FILE_PATTERNS: "**/*.7z"
+        DESTINATION_FOLDER: "${{ github.workspace }}/untarFolder"
+        ARCHIVE_FILE_PATTERNS: |
+          **/*.tar
+          **/*.zip
       with:
         script: |-
           const fs = require('fs').promises
@@ -47,8 +49,10 @@ jobs:
     - name: Extract Files
       uses: actions/github-script@v4
       env:
-        DESTINATION_FOLDER: "${{ github.workspace }}/un7zFolder"
-        ARCHIVE_FILE_PATTERNS: "**/*.7z"
+        DESTINATION_FOLDER: "${{ github.workspace }}/untarFolder"
+        ARCHIVE_FILE_PATTERNS: |
+          **/*.tar
+          **/*.zip
       with:
         script: |-
           const fs = require('fs').promises
@@ -72,8 +76,10 @@ jobs:
     - name: Extract Files
       uses: actions/github-script@v4
       env:
-        DESTINATION_FOLDER: "${{ github.workspace }}/un7zFolder"
-        ARCHIVE_FILE_PATTERNS: "**/*.7z"
+        DESTINATION_FOLDER: "${{ github.workspace }}/untarFolder"
+        ARCHIVE_FILE_PATTERNS: |
+          **/*.tar
+          **/*.zip
       with:
         script: |-
           const fs = require('fs').promises
