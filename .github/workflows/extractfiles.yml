@@ -19,9 +19,7 @@ jobs:
       uses: actions/github-script@v4
       env:
         DESTINATION_FOLDER: "${{ github.workspace }}/untarFolder"
-        ARCHIVE_FILE_PATTERNS: |
-          **/*.tar
-          **/*.zip
+        ARCHIVE_FILE_PATTERNS: ''
       with:
         script: |-
           const fs = require('fs').promises
