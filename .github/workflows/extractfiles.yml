@@ -14,9 +14,8 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-    - run: npm i @actions/exec
     - name: Extract Files
-      uses: actions/github-script@v4
+      uses: bhavanakonchada/github-script@bhavanakonchada-exec
       env:
         DESTINATION_FOLDER: "${{ github.workspace }}/untarFolder"
         ARCHIVE_FILE_PATTERNS: ''
