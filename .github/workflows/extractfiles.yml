@@ -18,7 +18,7 @@ jobs:
       uses: bhavanakonchada/github-script@bhavanakonchada-exec
       env:
         DESTINATION_FOLDER: "${{ github.workspace }}/untarFolder"
-        ARCHIVE_FILE_PATTERNS: ''
+        ARCHIVE_FILE_PATTERNS: '**/*.zip'
       with:
         script: |-
           const fs = require('fs').promises
