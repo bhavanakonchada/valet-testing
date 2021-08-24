@@ -16,7 +16,7 @@ jobs:
     - name: 'Copy Publish Artifact: Sox_Audito_ACL_Poc'
       uses: actions/github-script@v3
       env:
-        TARGET_FOLDER: temp_folder
+        TARGET_FOLDER: "${{ runner.temp }}"
         SOURCE_FOLDER: Sox_Audito_ACL_Poc
         CONTENTS: "**\\bin\\Release"
       with:
@@ -40,5 +40,4 @@ jobs:
     - name: 'Copy Publish Artifact: Sox_Audito_ACL_Poc'
       uses: actions/upload-artifact@v2
       with:
-        path: temp_folder
-
+        path: "${{ runner.temp }}"
