@@ -40,4 +40,5 @@ jobs:
     - name: 'Copy Publish Artifact: Sox_Audito_ACL_Poc'
       uses: actions/upload-artifact@v2
       with:
+        name: Sox_Audito_ACL_Poc
         path: "${{ runner.temp }}"
