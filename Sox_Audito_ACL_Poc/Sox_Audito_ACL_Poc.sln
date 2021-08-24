@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sox_Audito_ACL_Poc", "Sox_Audito_ACL_Poc.csproj", "{BDBA9EA1-7785-4E05-A593-3FE839CF9402}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDBA9EA1-7785-4E05-A593-3FE839CF9402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBA9EA1-7785-4E05-A593-3FE839CF9402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBA9EA1-7785-4E05-A593-3FE839CF9402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBA9EA1-7785-4E05-A593-3FE839CF9402}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF960AAA-8947-4E5F-9F69-1B7F3505853C}
+	EndGlobalSection
+EndGlobal
