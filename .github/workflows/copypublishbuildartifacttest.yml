@@ -39,4 +39,3 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Sox_Audito_ACL_Poc
-        path: "${{ runner.temp }}"
