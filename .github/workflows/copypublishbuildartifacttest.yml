@@ -12,7 +12,6 @@ jobs:
     - name: dotnet build
       run: 'dotnet build Sox_Audito_ACL_Poc/Sox_Audito_ACL_Poc.sln --configuration Release '
     # The following script preserves the globbing behavior of the CopyFiles task.
-    # Refer to this transformer's documentation for an alternative that will work in simple cases.
     - name: 'Copy Publish Artifact: Sox_Audito_ACL_Poc'
       uses: actions/github-script@v3
       env:
@@ -41,4 +40,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Sox_Audito_ACL_Poc
-        path: "${{ runner.temp }}"
+        path: "${{ runner.temp }}/${{ github.run_id }}_publishartifact"
