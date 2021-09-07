@@ -16,7 +16,7 @@ jobs:
     - name: 'Copy Publish Artifact: Sox_Audito_ACL_Poc'
       uses: actions/github-script@v3
       env:
-        TARGET_FOLDER: "${{ runner.temp }}"
+        TARGET_FOLDER: "${{ runner.temp }}/${{ github.run_id }}_publishartifact"
         SOURCE_FOLDER: Sox_Audito_ACL_Poc
         CONTENTS: "**\\bin\\Release"
       with:
