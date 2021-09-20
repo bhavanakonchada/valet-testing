@@ -23,9 +23,9 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore Sox_Audito_ACL_Poc/Sox_Audit_ACL_Poc.sln
+      run: dotnet restore Sox_Audito_ACL_Poc/Sox_Audito_ACL_Poc.sln
     - name: Build
-      run: dotnet build Sox_Audito_ACL_Poc/Sox_Audit_ACL_Poc.sln --no-restore --configuration Release
+      run: dotnet build Sox_Audito_ACL_Poc/Sox_Audito_ACL_Poc.sln --no-restore --configuration Release
     - name: Unit tests using VS Test with new search folder
       uses: microsoft-approved-actions/vstest@master
       with:
