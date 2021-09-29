@@ -1,0 +1,14 @@
+name: toolfinder
+
+on:
+  workflow_dispatch:
+  
+jobs:
+windows_job:
+  runs-on: windows_latest
+  steps:
+  - name: "Locate VS Test Executable"
+    shell: pwsh
+    run: |-
+      which vstest.console.exe
+
