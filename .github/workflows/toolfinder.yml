@@ -11,6 +11,6 @@ jobs:
     - name: "Locate VS Test Executable"
       shell: cmd
       run: |-
-        which vstest.console.exe
+        where vstest.console.exe
 
  
