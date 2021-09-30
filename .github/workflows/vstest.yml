@@ -26,9 +26,7 @@ jobs:
       run: dotnet restore Sox_Audito_ACL_Poc/Sox_Audito_ACL_Poc.sln
     - name: Build
       run: dotnet build Sox_Audito_ACL_Poc/Sox_Audito_ACL_Poc.sln --no-restore --configuration Release
-    - name: Unit tests using VS Test with new search folder
-      uses: microsoft.githubenterprise.com/microsoft-approved-actions/vstest@master
-      with:
-        searchFolder: ./
-        testAssembly: "**\\bin\\**\\*.Tests.dll"
-        runInParallel: true 
+    - name: Setup VSTest Path
+      uses: darenm/Setup-VSTest@v1
+    - name: VSTest
+      run: vstest.console.exe /Platform:x64 ACL_PoC.UnitTests/ACL_PoC.UnitTests.dll
