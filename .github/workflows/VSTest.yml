@@ -24,5 +24,22 @@ jobs:
       run: dotnet build Sox_Audito_ACL_Poc/Sox_Audito_ACL_Poc.sln --no-restore
     - name: Setup VSTest Path
       uses: darenm/Setup-VSTest@v1
-    - name: VSTest
-      run: vstest.console.exe /Platform:x64 ACL_PoC.UnitTests\bin\Debug\net5.0\ACL_PoC.UnitTests.dll
+    - name: Install Dependencies for VSTest
+      shell: pwsh
+      run: |
+        Set-PSRepository PSGallery -InstallationPolicy Trusted
+        Install-Module VstsTaskSdk
+    - name: Executing VSTest
+      shell: pwsh
+      run: |
+       Import-Module -Name VstsTaskSdk
+       Write-Host "Finding files for VSTest for execute.."
+       $DefaultRoot =  ${{ github.workspace }}
+       $ResultsPath =  ${{ github.workspace }}\test-results"
+       $Pattern = @("**\\*tests*.dll","!**\\*TestAdapter.dll","!**\\obj\\**")
+       $files = Find-VstsMatch -DefaultRoot $DefaultRoot -Pattern $Pattern -Verbose
+       Write-Host "Files found:" $files 
+       $exe = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe"
+       $args ="/Platform:x64 /ResultsDirectory:""$Resultspath"" /Logger:trx"
+       Write-Host $args # consider taking it off after testing
+       & $exe $files /Platform:x64 /ResultsDirectory:$Resultspath /Logger:trx    
