@@ -46,3 +46,11 @@ jobs:
        Write-Host "Files found:" $files 
        $exe = "vstest.console.exe"       
        & $exe $files /Platform:x64 /Logger:trx /ResultsDirectory:$ResultsPath
+    - name: Uploading Test Results
+      env:
+        RESULTS_FOLDER: ${{ runner.temp }}/${{ github.run_id }}_resultsfolder
+      uses: "actions/upload-artifact@v2"
+      with:
+        name: TestResultsFile
+        path: env:RESULTS_FOLDER
+   
