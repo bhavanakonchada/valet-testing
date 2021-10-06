@@ -32,13 +32,17 @@ jobs:
     - name: Executing VSTest
       env:
         DEFAULT_ROOT: ${{github.workspace}}
+        RESULTS_FOLDER: ${{runner.temp}}\${{ github.run_id }}\results_folder
       shell: pwsh
       run: |
        Import-Module -Name VstsTaskSdk
-       Write-Host "Finding files for VSTest for execute.."
+       Write-Host "Finding files for VSTest for execute.."       
        $DefaultRoot =  $env:DEFAULT_ROOT
+       Write-Host "Looking in folder:" $DefaultRoot
+       $ResutsPath = $env:RESULTS_FOLDER
+       Write-Host "Results folder:" $ResultsPath
        $Pattern = @("**\\*tests*.dll","!**\\*TestAdapter.dll","!**\\obj\\**")
        $files = Find-VstsMatch -DefaultRoot $DefaultRoot -Pattern $Pattern -Verbose
        Write-Host "Files found:" $files 
        $exe = "vstest.console.exe"       
-       & $exe $files /Platform:x64 /Logger:trx    
+       & $exe $files /Platform:x64 /Logger:trx /ResultsDirectory:$Resultspath
