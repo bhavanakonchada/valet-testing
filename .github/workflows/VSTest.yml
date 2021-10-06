@@ -30,12 +30,14 @@ jobs:
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module VstsTaskSdk -AllowClobber
     - name: Executing VSTest
+      env:
+        DEFAULT_ROOT: ${{github.workspace}}
       shell: pwsh
       run: |
        Import-Module -Name VstsTaskSdk
        Write-Host "Finding files for VSTest for execute.."
-       $DefaultRoot =  ${{ github.workspace }}
-       $ResultsPath =  ${{ github.workspace }}\test-results"
+       $DefaultRoot =  $env:DEFAULT_ROOT
+       $ResultsPath =  $env:DEFAULT_ROOT\test-results"
        $Pattern = @("**\\*tests*.dll","!**\\*TestAdapter.dll","!**\\obj\\**")
        $files = Find-VstsMatch -DefaultRoot $DefaultRoot -Pattern $Pattern -Verbose
        Write-Host "Files found:" $files 
