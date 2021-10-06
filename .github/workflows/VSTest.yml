@@ -30,6 +30,7 @@ jobs:
         Set-PSRepository PSGallery -InstallationPolicy Trusted
         Install-Module VstsTaskSdk -AllowClobber
     - name: Executing VSTest
+      continue-on-error: true
       env:
         DEFAULT_ROOT: ${{github.workspace}}
         RESULTS_FOLDER: ${{ runner.temp }}/${{ github.run_id }}_resultsfolder
