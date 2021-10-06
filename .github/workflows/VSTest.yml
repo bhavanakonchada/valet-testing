@@ -41,7 +41,7 @@ jobs:
        Write-Host "Looking in folder:" $DefaultRoot
        $ResultsPath = $env:RESULTS_FOLDER
        Write-Host "Results folder:" $ResultsPath
-       $Pattern = @("**\\*Test*.dll","!**\\*TestAdapter.dll","!**\\obj\\**")
+       $Pattern = @("**\\*UnitTest*.dll","!**\\*TestAdapter.dll","!**\\obj\\**")
        $files = Find-VstsMatch -DefaultRoot $DefaultRoot -Pattern $Pattern
        Write-Host "Files found:" $files 
        $exe = "vstest.console.exe"       
