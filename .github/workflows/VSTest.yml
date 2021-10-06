@@ -32,7 +32,7 @@ jobs:
     - name: Executing VSTest
       env:
         DEFAULT_ROOT: ${{github.workspace}}
-        RESULTS_FOLDER: ${{runner.temp}}\${{ github.run_id }}\results_folder
+        RESULTS_FOLDER: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/results_folder
       shell: pwsh
       run: |
        Import-Module -Name VstsTaskSdk
