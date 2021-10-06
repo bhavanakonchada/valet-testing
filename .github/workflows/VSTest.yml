@@ -37,7 +37,7 @@ jobs:
        Import-Module -Name VstsTaskSdk
        Write-Host "Finding files for VSTest for execute.."
        $DefaultRoot =  $env:DEFAULT_ROOT
-       $ResultsPath =  $env:DEFAULT_ROOT\test-results"
+       $ResultsPath =  $env:DEFAULT_ROOT\test-results
        $Pattern = @("**\\*tests*.dll","!**\\*TestAdapter.dll","!**\\obj\\**")
        $files = Find-VstsMatch -DefaultRoot $DefaultRoot -Pattern $Pattern -Verbose
        Write-Host "Files found:" $files 
