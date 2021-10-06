@@ -40,6 +40,6 @@ jobs:
        $files = Find-VstsMatch -DefaultRoot $DefaultRoot -Pattern $Pattern -Verbose
        Write-Host "Files found:" $files 
        $exe = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe"
-       $args ="/Platform:x64 /ResultsDirectory:""$Resultspath"" /Logger:trx"
+       #$args ="/Platform:x64 /ResultsDirectory:""$Resultspath"" /Logger:trx"
        Write-Host $args # consider taking it off after testing
        & $exe $files /Platform:x64 /ResultsDirectory:$Resultspath /Logger:trx    
