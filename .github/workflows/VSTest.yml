@@ -39,10 +39,10 @@ jobs:
        Write-Host "Finding files for VSTest for execute.."       
        $DefaultRoot =  $env:DEFAULT_ROOT
        Write-Host "Looking in folder:" $DefaultRoot
-       $ResutsPath = $env:RESULTS_FOLDER
+       $ResultsPath = $env:RESULTS_FOLDER
        Write-Host "Results folder:" $ResultsPath
        $Pattern = @("**\\*tests*.dll","!**\\*TestAdapter.dll","!**\\obj\\**")
        $files = Find-VstsMatch -DefaultRoot $DefaultRoot -Pattern $Pattern
        Write-Host "Files found:" $files 
        $exe = "vstest.console.exe"       
-       & $exe $files /Platform:x64 /Logger:trx /ResultsDirectory:$Resultspath
+       & $exe $files /Platform:x64 /Logger:trx /ResultsDirectory:$ResultsPath
