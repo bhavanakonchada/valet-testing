@@ -33,19 +33,21 @@ jobs:
       continue-on-error: true
       env:
         DEFAULT_ROOT: ${{github.workspace}}
+        RESULT_FOLDER: ${{ runner.temp }}/${{ github.run_id }}_resultsfolder
         SEARCH_PATTERN: "**\\*UnitTest*.dll;!**\\*TestAdapter.dll;!**\\obj\\**;!**\\ref\\**"
-        ARGS: "/Platform:x64; /ResultsDirectory:${{ runner.temp }}/${{ github.run_id }}_resultsfolder;/Logger:trx"
+        ARGS: "/Platform:x64; /Logger:trx"
       shell: pwsh
       run: |
        Import-Module -Name VstsTaskSdk
-       Write-Host "Finding files for VSTest for execute.." 
-       Write-Host "Results folder:" ${{ runner.temp }}/${{ github.run_id }}_resultsfolder
-       $Pattern = $env:SEARCH_PATTERN.Split(';').Trim()
-       Write-Host "Patterns are:" $Pattern
-       $files = Find-VstsMatch -DefaultRoot $env:DEFAULT_ROOT -Pattern $Pattern
+       $SearchPattern = $env:SEARCH_PATTERN.Split(';').Trim()
+       Write-Host "Search Pattern: " $SearchPattern
+       Write-Host "Finding files for VSTest to execute.." 
+       $files = Find-VstsMatch -DefaultRoot $env:DEFAULT_ROOT -Pattern $SearchPattern
        Write-Host "Files found:" $files 
-       $exe = "vstest.console.exe"       
-       & $exe $files $env:ARGS
+       $exe = "vstest.console.exe"    
+       $args = $env:ARGS.Split(';').Trim()
+       Write-Host "Arguments are: " $args
+       & $exe $files $args /ResultsDirectory:$env:RESULT_FOLDER
     - name: Uploading Test Results
       env:
         RESULTS_FOLDER: ${{ runner.temp }}/${{ github.run_id }}_resultsfolder
