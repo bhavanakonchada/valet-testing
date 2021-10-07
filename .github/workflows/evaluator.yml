@@ -14,7 +14,7 @@ jobs:
         DEFAULT_ROOT: ${{github.workspace}}
         RESULTS_FOLDER: ${{ runner.temp }}/${{ github.run_id }}_resultsfolder
         SEARCH_PATTERN: "**\\*UnitTest*.dll;!**\\*TestAdapter.dll;!**\\obj\\**;!**\\ref\\**"
-        ARGS: "/Platform:x64; /ResultsDirectory:+${{RESULTS_FOLDER}};/Logger:trx"
+        ARGS: "/Platform:x64; /ResultsDirectory:${{RESULTS_FOLDER}};/Logger:trx"
        shell: pwsh
        run: |
          Write-Host "hello"
