@@ -34,19 +34,19 @@ jobs:
       env:
         DEFAULT_ROOT: ${{github.workspace}}
         RESULTS_FOLDER: ${{ runner.temp }}/${{ github.run_id }}_resultsfolder
+        SEARCH_PATTERN: "**\\*UnitTest*.dll;!**\\*TestAdapter.dll;!**\\obj\\**;!**\\ref\\**"
+        ARGS: "/Platform:x64; /ResultsDirectory:${{ runner.temp }}/${{ github.run_id }}_resultsfolder;/Logger:trx"
       shell: pwsh
       run: |
        Import-Module -Name VstsTaskSdk
-       Write-Host "Finding files for VSTest for execute.."       
-       $DefaultRoot =  $env:DEFAULT_ROOT
-       Write-Host "Looking in folder:" $DefaultRoot
-       $ResultsPath = $env:RESULTS_FOLDER
+       Write-Host "Finding files for VSTest for execute.." 
        Write-Host "Results folder:" $ResultsPath
-       $Pattern = @("**\\*UnitTest*.dll","!**\\*TestAdapter.dll","!**\\obj\\**","!**\\ref\\**")
-       $files = Find-VstsMatch -DefaultRoot $DefaultRoot -Pattern $Pattern
+       $Pattern = $env:SEARCH_PATTERN.Split(';').Trim()
+       Write-Host "Patterns are:" $ResultsPath
+       $files = Find-VstsMatch -DefaultRoot $env:DEFAULT_ROOT -Pattern $Pattern
        Write-Host "Files found:" $files 
        $exe = "vstest.console.exe"       
-       & $exe $files /Platform:x64 /Logger:trx /ResultsDirectory:$ResultsPath
+       & $exe $files $env:ARGS
     - name: Uploading Test Results
       env:
         RESULTS_FOLDER: ${{ runner.temp }}/${{ github.run_id }}_resultsfolder
