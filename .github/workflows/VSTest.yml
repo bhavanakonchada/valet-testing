@@ -35,7 +35,7 @@ jobs:
         SEARCH_FOLDER: "${{ github.workspace }}"
         TEST_RESULTS_FOLDER: "${{ runner.temp }}/${{ github.run_id }}_resultsfolder"
         PATTERN: "**\\*Test*.dll;!**\\*TestAdapter.dll;!**\\obj\\**"
-        ARGS: "/Logger:trx /TestCaseFilter:ghc /Platform:x64"
+        ARGS: /Logger:trx /Platform:x64
       shell: pwsh
       run: |-
         Import-Module -Name VstsTaskSdk
