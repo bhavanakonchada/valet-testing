@@ -52,7 +52,6 @@ jobs:
         script: |-
           const fs = require('fs').promises
           const path = require('path')
-          const exec = require('@actions/exec')
           const target = path.resolve(process.env.DESTINATION_FOLDER)
           const patterns = process.env.ARCHIVE_FILE_PATTERNS
           const globber = await glob.create(patterns)
@@ -78,7 +77,6 @@ jobs:
         script: |-
           const fs = require('fs').promises
           const path = require('path')
-          const exec = require('@actions/exec')
           const target = path.resolve(process.env.DESTINATION_FOLDER)
           const patterns = process.env.ARCHIVE_FILE_PATTERNS
           const globber = await glob.create(patterns)
