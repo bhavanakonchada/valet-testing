@@ -41,7 +41,6 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-    - run: npm i @actions/exec
     - name: Extract Files
       uses: actions/github-script@v4
       env:
@@ -68,7 +67,6 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-    - run: npm i @actions/exec
     - name: Extract Files
       uses: actions/github-script@v4
       env:
