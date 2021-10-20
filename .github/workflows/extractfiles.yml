@@ -15,7 +15,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
     - name: Extract Files
-      uses: bhavanakonchada/github-script@bhavanakonchada-exec
+      uses: actions/github-script@v4
       env:
         DESTINATION_FOLDER: "${{ github.workspace }}/untarFolder"
         ARCHIVE_FILE_PATTERNS: '**/*.zip'
