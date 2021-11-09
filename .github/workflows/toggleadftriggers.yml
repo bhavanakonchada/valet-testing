@@ -13,7 +13,8 @@ jobs:
       - name: Login via Az module
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.ADF_CREDENTIAL }}
+          creds: ${{ secrets.ADF_CREDENTIAL }}          
+          enable-AzPSSession: true 
       - name: Start ADF Triggers
         env:
          ResourceGroupName: "Learn-ADF-RG"
