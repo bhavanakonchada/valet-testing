@@ -14,3 +14,17 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.ADF_CREDENTIAL }}
+      - name: Azure CLI Action
+        uses: Azure/cli@1.0.4
+        with:
+          # Specify the script here
+          inlineScript: |
+            $triggers =	az datafactory trigger list --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG"            
+            foreach($name in $names){
+                az datafactory trigger stop --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG" --name $name --only-show-errors
+            }
+
+            
+              
+              
+
