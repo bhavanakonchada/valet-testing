@@ -20,7 +20,8 @@ jobs:
          DataFactoryName: "learn-adf-bk"
         shell: pwsh
         run: |-
-            Install-Module -Name Az -AllowClobber -Scope CurrentUser
+            Set-PSRepository PSGallery -InstallationPolicy Trusted
+            Install-Module -Name Az -AllowClobber
             $triggers = Get-AzDataFactoryV2Trigger -ResourceGroupName $env:ResourceGroupName -DataFactoryName $env:DataFactoryName       
             foreach($trigger in $triggers){
                Start-AzDataFactoryV2Trigger -ResourceGroupName $env:ResourceGroupName -DataFactoryName $env:DataFactoryName -Name $trigger -Force | Out-Null
