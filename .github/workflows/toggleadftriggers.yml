@@ -14,6 +14,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.ADF_CREDENTIAL }}
+          enable-AzPSSession: true
       - name: Azure CLI Action
         uses: Azure/cli@1.0.4
         with:
