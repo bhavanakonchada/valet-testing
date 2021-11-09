@@ -14,16 +14,15 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.ADF_CREDENTIAL }}
-          enable-AzPSSession: true
-      - name: Run Az PowerShell Script
-        uses: azure/powershell@v1
-        with:
-          azPSVersion: '3.1.0'
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            $triggers =	az datafactory trigger list --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG"            
+      - name: Start ADF Triggers
+        env:
+         ResourceGroupName: "Learn-ADF-RG"
+         DataFactoryName: "learn-adf-bk"
+        shell: pwsh
+        run: |-
+            $triggers = Get-AzDataFactoryV2Trigger -ResourceGroupName $env:ResourceGroupName -DataFactoryName $env:DataFactoryName       
             foreach($trigger in $triggers){
-                az datafactory trigger stop --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG" --name $trigger --only-show-errors
+               Start-AzDataFactoryV2Trigger -ResourceGroupName $env:ResourceGroupName -DataFactoryName $env:DataFactoryName -Name $trigger -Force | Out-Null
             }
 
 
