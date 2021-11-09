@@ -20,8 +20,8 @@ jobs:
           # Specify the script here
           inlineScript: |
             $triggers =	az datafactory trigger list --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG"            
-            foreach($name in $names){
-                az datafactory trigger stop --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG" --name $name --only-show-errors
+            foreach($trigger in $triggers){
+                az datafactory trigger stop --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG" --name $trigger --only-show-errors
             }
 
             
