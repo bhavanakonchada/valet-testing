@@ -19,6 +19,7 @@ jobs:
         with:
           # Specify the script here
           inlineScript: |
+            az config set extension.use_dynamic_install=yes_without_prompt
             az datafactory trigger list --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG"  
             
 
