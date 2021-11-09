@@ -14,13 +14,11 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.ADF_CREDENTIAL }}
-      - name: Azure CLI Action
-        uses: Azure/cli@1.0.4
-        with:
-          # Specify the script here
-          inlineScript: |
-            az config set extension.use_dynamic_install=yes_without_prompt
-            az datafactory trigger list --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG"  
+          enable-AzPSSession: true
+      - name: Run Azure CLI 
+        run: |
+          az config set extension.use_dynamic_install=yes_without_prompt
+          az datafactory trigger list --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG"
             
 
             
