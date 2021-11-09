@@ -22,9 +22,9 @@ jobs:
         shell: pwsh
         run: |-
             Set-PSRepository PSGallery -InstallationPolicy Trusted
-            Install-Module -Name Az -AllowClobber
+            Install-Module -Name Az.DataFactory -AllowClobber
             $triggers = Get-AzDataFactoryV2Trigger -ResourceGroupName $env:ResourceGroupName -DataFactoryName $env:DataFactoryName       
-            foreach($trigger in $triggers){
+            foreach($trigger in $triggeAz.DataFactoryrs){
                Start-AzDataFactoryV2Trigger -ResourceGroupName $env:ResourceGroupName -DataFactoryName $env:DataFactoryName -Name $trigger -Force | Out-Null
             }
 
