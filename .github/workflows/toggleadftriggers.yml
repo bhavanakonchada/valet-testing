@@ -14,16 +14,13 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.ADF_CREDENTIAL }}
-          enable-AzPSSession: true
       - name: Azure CLI Action
         uses: Azure/cli@1.0.4
         with:
           # Specify the script here
           inlineScript: |
-            $triggers =	az datafactory trigger list --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG"            
-            foreach($trigger in $triggers){
-                az datafactory trigger stop --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG" --name $trigger --only-show-errors
-            }
+            $triggers =	az datafactory trigger list --factory-name "learn-adf-bk" --resource-group "Learn-ADF-RG"  
+            Write-Host $triggers
 
             
               
