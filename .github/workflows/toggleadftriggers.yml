@@ -15,20 +15,19 @@ jobs:
         with:
           creds: ${{ secrets.ADF_CREDENTIAL }}          
           enable-AzPSSession: true 
-      - name: Start ADF Triggers
+      - name: Toggle ADF Trigger
         env:
-         ResourceGroupName: "Learn-ADF-RG"
-         DataFactoryName: "learn-adf-bk"
+          RESOURCE_GROUP_NAME: Learn-ADF-RG
+          DATA_FACTORY_NAME: learn-adf-bk
         shell: pwsh
         run: |-
-            Set-PSRepository PSGallery -InstallationPolicy Trusted
-            Install-Module -Name Az.DataFactory -AllowClobber
-            $triggers = Get-AzDataFactoryV2Trigger -ResourceGroupName $env:ResourceGroupName -DataFactoryName $env:DataFactoryName       
-            foreach($trigger in $triggers){
-              Write-Host "Starting Trigger" $trigger.Name
-               Start-AzDataFactoryV2Trigger -ResourceGroupName $env:ResourceGroupName -DataFactoryName $env:DataFactoryName -Name $trigger.Name -Force
-            }
-
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Az.DataFactory -AllowClobber
+          $triggers = Get-AzDataFactoryV2Trigger -ResourceGroupName $env:RESOURCE_GROUP_NAME -DataFactoryName $env:DATA_FACTORY_NAME
+          foreach($trigger in $triggers){
+            Write-Host "Start Trigger" $trigger.Name
+            Start-AzDataFactoryV2Trigger -ResourceGroupName $env:RESOURCE_GROUP_NAME -DataFactoryName $env:DATA_FACTORY_NAME -Name $trigger.Name -Force
+          }
 
             
               
